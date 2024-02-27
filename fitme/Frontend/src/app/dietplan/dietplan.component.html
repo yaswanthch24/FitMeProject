@@ -1,0 +1,29 @@
+<br><br><br>
+
+<h1>Diet Plan for Health</h1>
+
+<div class="health-selector">
+    <label for="healthStatus">Select Your Health Status:</label>
+    <select id="healthStatus" [(ngModel)]="healthStatus">
+        <option value="obese">Obese</option>
+        <option value="overweight">Overweight</option>
+        <option value="underweight">Underweight</option>
+        <option value="normal">Normal</option>
+    </select>
+</div>
+<table>
+    <tr>
+        <th>Day</th>
+        <th>Breakfast</th>
+        <th>Lunch</th>
+        <th>Snacks</th>
+        <th>Dinner</th>
+    </tr>
+    <tr *ngFor="let meal of dietPlans[healthStatus]">
+        <td>{{ meal.day }}</td>
+        <td>{{ meal.breakfast }}</td>
+        <td>{{ meal.lunch }}</td>
+        <td>{{ meal.snacks }}</td>
+        <td>{{ meal.dinner }}</td>
+    </tr>
+</table>

@@ -1,0 +1,39 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="./assets/fitness slide 2.jpg"
+          class="d-block w-100" alt="First Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="./assets/fitness slide 1.jpg"
+          class="d-block w-100" alt="Second Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="https://media.slidesgo.com/storage/43395436/responsive-images/0-athletic-trainer-portfolio___media_library_original_1600_900.jpg"
+          class="d-block w-100" alt="Third Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="./assets/fitness slide 1.jpg"
+          class="d-block w-100" alt="Fourth Slide">
+      </div>
+    </div>
+  </div>
+
+  <h1 align="center">Our Products</h1> <br/>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let product of products">
+      <div class="card mb-4">
+        <img src="{{ product.imageUrl }}" class="card-img-top" alt="{{ product.name }}" style="height: 110px;padding: 10px;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text">Price: ₹{{ product.price }}</p>
+          <p align="right"><button (click)="addToCart(product)" class="btn btn-primary">AddToCart</button> </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

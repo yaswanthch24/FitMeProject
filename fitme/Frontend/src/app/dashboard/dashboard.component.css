@@ -1,0 +1,25 @@
+
+#myCarousel {
+    margin-top: 20px;
+    margin-bottom: 30px; 
+  }
+
+
+#myCarousel {
+  position: relative;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px; 
+  height: 30px;
+  font-size: 14px; 
+  background: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}

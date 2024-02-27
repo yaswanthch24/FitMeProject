@@ -1,0 +1,44 @@
+<br /><br /><br />
+<div align="center">
+  <form #workerForm="ngForm" (ngSubmit)="getTrainers()">
+    <table>
+      <tr>
+        <td align="right">Enter Pincode</td>
+        <td align="left"><input type="text" name="pincode" [(ngModel)]="formModel.pincode" /></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td align="left"><button type="submit">Get Trainers</button></td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<br />
+
+<div *ngIf="trainers && trainers.length > 0" align="center" class="container">
+  <table class="table table-hover table-striped table-sm table-bordered">
+    <thead>
+      <tr align="center">
+        <th class="bg-info text-blue">Trainer Name</th>
+        <th class="bg-info text-blue">Email Id</th>
+        <th class="bg-info text-blue">Phone Number</th>
+        <th class="bg-info text-blue">Pincode</th>
+        <th class="bg-info text-blue">Book Trainer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trainer of trainers" align="center">
+        <td>{{ trainer.trainerName | uppercase}}</td>
+        <td>{{ trainer.emailId }}</td>
+        <td>{{ trainer.phoneNumber }}</td>
+        <td>{{ trainer.pincode }}</td>
+        <td><button (click)="bookNow(trainer.emailId)">Book-Now</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="!trainers || trainers.length == 0" align="center" class="container">
+  <h4>Trainer record not found</h4>
+</div>

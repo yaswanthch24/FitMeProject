@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <br /><br /><br /><br />
+    <section class="container">
+        <form #otpForm="ngForm" (ngSubmit)="otpSubmit(otpForm.value)" novalidate>
+            <header>
+                <h2>OTP Verification</h2>
+            </header>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="text" class="form-control" name="otp" ngModel required pattern="[0-9]{6}" minlength="6"
+                        maxlength="6" placeholder="Enter OTP" />
+                </div>
+                <div *ngIf="otpForm.controls['otp'].errors?.['required'] && otpForm.controls['otp'].touched"
+                    class="error-message">Please Enter OTP</div>
+                <div *ngIf="otpForm.controls['otp'].errors?.['pattern'] && otpForm.controls['otp'].touched"
+                    class="error-message">Please Enter a Valid OTP (6 digits)</div>
+            </div>
+            <button [disabled]="!otpForm.valid" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+</body>
+</html>

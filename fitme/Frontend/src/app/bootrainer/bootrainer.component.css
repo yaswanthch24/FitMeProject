@@ -1,0 +1,58 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form table {
+  width: 100%;
+}
+
+form td {
+  padding: 10px;
+}
+
+input {
+  width: 50%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-container th,
+.table-container td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.table-container th {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Style the not found message */
+.notfound-container {
+  margin-top: 20px;
+}
+
+.notfound-container h4 {
+  color: #dc3545;
+}

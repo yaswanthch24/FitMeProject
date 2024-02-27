@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <section class="container">
+    <form #regForm="ngForm" (ngSubmit)="registerSubmit(regForm.value)" novalidate>
+      <header>
+        <h2>Create an Account</h2>
+      </header>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input type="text" class="form-control" name="customerName" ngModel required minlength="2" maxlength="30"
+            placeholder="Full Name" />
+        </div>
+        <div *ngIf="regForm.controls['customerName'].errors?.['required'] && regForm.controls['customerName'].touched"
+          class="error-message">Please Enter Full Name</div>
+        <div *ngIf="regForm.controls['customerName'].errors?.['minlength'] && regForm.controls['customerName'].touched"
+          class="error-message">Full Name should be at least 2 characters</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+          <input type="text" class="form-control" name="emailId" ngModel required
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" minlength="11" maxlength="40"
+            placeholder="Email" />
+        </div>
+        <div *ngIf="regForm.controls['emailId'].errors?.['required'] && regForm.controls['emailId'].touched"
+          class="error-message">Please Enter Email-Id</div>
+        <div *ngIf="regForm.controls['emailId'].errors?.['pattern'] && regForm.controls['emailId'].touched"
+          class="error-message">Please Enter a Valid Email-Id</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" name="password"
+            #password="ngModel" ngModel required minlength="8" maxlength="15"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,15}$" placeholder="Password" />
+          <span class="input-group-addon" (click)="togglePasswordVisibility()">
+            <i class="{{ showPassword ? 'fa fa-eye-slash' : 'fa fa-eye' }}"></i>
+          </span>
+        </div>
+        <div *ngIf="password.errors?.['required'] && password.touched" style="color: red;">Please Enter Password</div>
+        <div *ngIf="password.errors?.['minlength'] && password.touched" style="color: red;">Please Enter At least 8
+          Characters for Password</div>
+        <div *ngIf="password.errors?.['pattern'] && password.touched" style="color: red;">Please Enter a valid password
+          with at least 1 special character, 1 lowercase letter, 1 uppercase letter, and 1 digit</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input type="{{ showConfirmPassword ? 'text' : 'password' }}" class="form-control" id="confirmPassword"
+            name="confirmPassword" ngModel required minlength="8" maxlength="12" placeholder="Confirm Password">
+          <span class="input-group-addon" (click)="toggleconfirmPasswordVisibility()">
+            <i class="{{ showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye' }}"></i>
+          </span>
+        </div>
+        <div
+          *ngIf="regForm.controls['confirmPassword'].errors?.['required'] && regForm.controls['confirmPassword'].touched"
+          class="error-message">
+          Please confirm your password.
+        </div>
+        <div
+          *ngIf="regForm.controls['password'].value != regForm.controls['confirmPassword'].value && regForm.controls['confirmPassword'].touched"
+          class="error-message">
+          Passwords do not match.
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+          <input type="text" class="form-control" name="phoneNumber" ngModel required pattern="^[6-9]\d{9}$"
+            minlength="10" maxlength="10" placeholder="Phone Number" />
+        </div>
+        <div *ngIf="regForm.controls['phoneNumber'].errors?.['required'] && regForm.controls['phoneNumber'].touched"
+          class="error-message">Please Enter Phone Number</div>
+        <div *ngIf="regForm.controls['phoneNumber'].errors?.['pattern'] && regForm.controls['phoneNumber'].touched"
+          class="error-message">Please Enter a Valid Phone Number</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+          <select class="form-control" name="gender" ngModel required>
+            <option value="" selected>Select Gender</option>
+            <option value="Male"><i class="fa fa-male"></i> Male</option>
+            <option value="Female"><i class="fa fa-female"></i> Female</option>
+            <option value="Others"><i class="fa fa-genderless"></i> Others</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+          <select class="form-control" name="country" ngModel aria-placeholder="Country" required>
+            <option value="" selected>Select Country</option>
+            <option value="{{country.cca3}}" *ngFor="let country of countries"><i class="fa fa-flag"></i>
+              {{country.name.common}}</option>
+          </select>
+          <div *ngIf="regForm.controls['country'].errors?.['required'] && regForm.controls['country'].touched"
+            class="error-message">Please Select Country</div>
+        </div>
+      </div>
+      <button
+        [disabled]="!regForm.valid || regForm.controls['password'].value !== regForm.controls['confirmPassword'].value"
+        class="btn btn-primary">Submit</button>
+    </form>
+  </section>
+</body>
+</html>

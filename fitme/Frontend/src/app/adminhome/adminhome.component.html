@@ -1,0 +1,61 @@
+<br /><br /><br /><br /><br />
+<h2>Welcome Admin</h2>
+<h2>Hii Admin, long time no see!</h2>
+<p>Total Customers Registered: {{ customerCount }}</p>
+<p>Total Trainers Registered: {{ trainerCount }}</p>
+<div align="center" class="container">
+  <button (click)="showCustomerTable()">Get Customers</button>
+  <button (click)="showTrainerTable()">Get Trainers</button>
+</div>
+
+<div *ngIf="showCustomerTableFlag" align="center" class="container">
+  <h1 align="center">Customers Data</h1>
+  <br />
+  <table class="table table-hover table-striped table-sm table-bordered">
+    <thead>
+      <tr align="center">
+        <th class="bg-info text-white">CustomerId</th>
+        <th class="bg-info text-white">CustomerName</th>
+        <th class="bg-info text-white">EmailId</th>
+        <th class="bg-info text-white">PhoneNumber</th>
+        <th class="bg-info text-white">Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers" align="center">
+        <td>{{ customer.customerId}}</td>
+        <td>{{ customer.customerName | gender:customer.gender | uppercase}}</td>
+        <td>{{ customer.emailId }}</td>
+        <td>{{ customer.phoneNumber }}</td>
+        <td>{{ customer.gender | lowercase}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="showTrainerTableFlag" align="center" class="container">
+  <h1 align="center">Trainers Data</h1>
+  <br />
+  <table class="table table-hover table-striped table-sm table-bordered">
+    <thead>
+      <tr align="center">
+        <th class="bg-info text-white">TrainerId</th>
+        <th class="bg-info text-white">TrainerName</th>
+        <th class="bg-info text-white">EmailId</th>
+        <th class="bg-info text-white">PhoneNumber</th>
+        <th class="bg-info text-white">Gender</th>
+        <th class="bg-info text-white">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trainer of trainers" align="center">
+        <td>{{ trainer.trainerId }}</td>
+        <td>{{ trainer.trainerName | uppercase}}</td>
+        <td>{{ trainer.emailId }}</td>
+        <td>{{ trainer.phoneNumber }}</td>
+        <td>{{ trainer.gender | lowercase}}</td>
+        <td> <button (click)="deleteTrainer(trainer)" class="glyphicon glyphicon-trash"> delete</button> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
